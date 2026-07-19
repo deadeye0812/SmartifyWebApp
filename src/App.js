@@ -1,23 +1,13 @@
-import logo from './logo.svg';
-import './App.css';
+import './styles/weather-outlook-styles.css';
+import './styles/sensor-station-styles.css'
+import SensorDashboard from './sites/sensor-dashboard';
+import WeatherOutlook from './sites/weather-outlook';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <WeatherOutlook/>
+      <SensorDashboard/>
     </div>
   );
 }

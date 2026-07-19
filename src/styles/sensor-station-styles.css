@@ -1,0 +1,200 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+        .ss-root {
+          --bg: #15181b;
+          --panel: #1c2024;
+          --panel-raised: #21262b;
+          --line: #2a3136;
+          --text: #edeff1;
+          --text-dim: #838d94;
+          --text-faint: #4d565c;
+          --warm: #ff8f5e;
+          --warm-dim: #ff8f5e33;
+          --cool: #52c7e0;
+          --cool-dim: #52c7e033;
+          --alert: #f2c744;
+          --alert-dim: #f2c74433;
+          --ok: #5fd08a;
+          --radius: 10px;
+          font-family: 'Space Grotesk', -apple-system, sans-serif;
+          background: var(--bg);
+          color: var(--text);
+          padding: 28px;
+          min-height: 100%;
+          box-sizing: border-box;
+        }
+        .ss-root * { box-sizing: border-box; }
+        .ss-mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+
+        .ss-header {
+          display: flex;
+          align-items: baseline;
+          justify-content: space-between;
+          margin-bottom: 22px;
+          padding-bottom: 16px;
+          border-bottom: 1px solid var(--line);
+          flex-wrap: wrap;
+          gap: 10px;
+        }
+        .ss-title-block { display: flex; align-items: baseline; gap: 12px; }
+        .ss-eyebrow {
+          font-size: 11px;
+          letter-spacing: 0.16em;
+          color: var(--text-faint);
+          text-transform: uppercase;
+        }
+        .ss-title {
+          font-size: 20px;
+          font-weight: 700;
+          letter-spacing: 0.02em;
+        }
+        .ss-status {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          font-size: 12px;
+          color: var(--text-dim);
+        }
+        .ss-dot {
+          width: 7px;
+          height: 7px;
+          border-radius: 50%;
+          background: var(--ok);
+          box-shadow: 0 0 0 3px color-mix(in srgb, var(--ok) 20%, transparent);
+        }
+        .ss-dot.down { background: var(--alert); box-shadow: 0 0 0 3px color-mix(in srgb, var(--alert) 20%, transparent); }
+        .ss-clock { color: var(--text-dim); }
+
+        .ss-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 14px;
+          margin-bottom: 14px;
+        }
+        @media (max-width: 640px) {
+          .ss-grid { grid-template-columns: 1fr; }
+        }
+
+        .ss-card {
+          background: var(--panel);
+          border: 1px solid var(--line);
+          border-radius: var(--radius);
+          padding: 18px 20px;
+        }
+        .ss-card-head {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-bottom: 14px;
+        }
+        .ss-label {
+          font-size: 11px;
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+          color: var(--text-dim);
+          display: flex;
+          align-items: center;
+          gap: 7px;
+        }
+        .ss-reading {
+          display: flex;
+          align-items: flex-end;
+          gap: 4px;
+          margin-bottom: 12px;
+        }
+        .ss-value {
+          font-size: 40px;
+          font-weight: 500;
+          line-height: 1;
+          letter-spacing: -0.01em;
+        }
+        .ss-unit {
+          font-size: 16px;
+          color: var(--text-dim);
+          padding-bottom: 4px;
+        }
+        .ss-minmax {
+          font-size: 11px;
+          color: var(--text-faint);
+          display: flex;
+          gap: 14px;
+          margin-top: 10px;
+        }
+        .ss-spark { display: block; overflow: visible; }
+
+        .ss-motion {
+          background: var(--panel);
+          border: 1px solid var(--line);
+          border-radius: var(--radius);
+          padding: 20px 22px;
+          display: grid;
+          grid-template-columns: auto 1fr;
+          gap: 22px;
+          align-items: center;
+        }
+        @media (max-width: 640px) {
+          .ss-motion { grid-template-columns: 1fr; justify-items: center; text-align: center; }
+        }
+
+        .ss-radar-wrap { position: relative; width: 86px; height: 86px; flex-shrink: 0; }
+        .ss-radar-ring {
+          position: absolute; inset: 0;
+          border-radius: 50%;
+          border: 1px solid var(--line);
+        }
+        .ss-radar-ring.mid { inset: 14px; }
+        .ss-radar-ring.core { inset: 30px; display: flex; align-items: center; justify-content: center; }
+        .ss-radar-sweep {
+          position: absolute; inset: 0;
+          border-radius: 50%;
+          background: conic-gradient(from 0deg, transparent 0deg, color-mix(in srgb, var(--cool) 55%, transparent) 28deg, transparent 56deg);
+          animation: ss-spin 3.2s linear infinite;
+        }
+        .ss-motion.triggered .ss-radar-sweep {
+          background: conic-gradient(from 0deg, transparent 0deg, color-mix(in srgb, var(--alert) 70%, transparent) 30deg, transparent 60deg);
+          animation-duration: 1.1s;
+        }
+        @keyframes ss-spin { to { transform: rotate(360deg); } }
+        .ss-radar-dot {
+          width: 10px; height: 10px; border-radius: 50%;
+          background: var(--cool);
+          box-shadow: 0 0 10px 2px var(--cool-dim);
+          transition: background 0.2s, box-shadow 0.2s;
+        }
+        .ss-motion.triggered .ss-radar-dot {
+          background: var(--alert);
+          box-shadow: 0 0 14px 4px var(--alert-dim);
+        }
+
+        .ss-motion-info { min-width: 0; }
+        .ss-motion-status {
+          font-size: 19px;
+          font-weight: 600;
+          margin-bottom: 3px;
+          transition: color 0.2s;
+        }
+        .ss-motion.triggered .ss-motion-status { color: var(--alert); }
+        .ss-motion-sub { font-size: 12px; color: var(--text-dim); margin-bottom: 14px; }
+
+        .ss-timeline {
+          position: relative;
+          height: 26px;
+          border-top: 1px solid var(--line);
+          padding-top: 8px;
+        }
+        .ss-timeline-label {
+          font-size: 10px;
+          color: var(--text-faint);
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          margin-bottom: 4px;
+        }
+        .ss-tick {
+          position: absolute;
+          bottom: 8px;
+          width: 2px;
+          height: 14px;
+          background: var(--alert);
+          border-radius: 1px;
+          opacity: 0.85;
+        }
