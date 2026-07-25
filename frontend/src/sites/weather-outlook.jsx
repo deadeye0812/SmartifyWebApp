@@ -1,27 +1,9 @@
 import {Sun, CloudSun, Cloud, CloudRain, CloudSnow, CloudLightning, CloudFog} from 'lucide-react';
-import WeatherHeader from '../components/WeatherStation/WeatherHeader';
-import WeatherToday from '../components/WeatherStation/WeatherToday';
-import WeahterNextDays from '../components/WeatherStation/WeatherNextDays';
-import { getAllDates, getPrecipitationOfAllDates, getTemperatureForNext5Days } from '../api-calls/SensorAPICalls';
+import WeatherHeader from '../components/WeatherStation/WeatherHeaderComponent/WeatherHeader';
+import WeatherToday from '../components/WeatherStation/WeatherTodayComponent/WeatherToday';
+import WeahterNextDays from '../components/WeatherStation/WeatherNextDaysComponent/WeatherNextDays';
+import { meteoService } from '../services/SensorAPICalls';
 import {useCallback} from 'react';
-import { getMinMaxTemperatureNext5Days } from '../api-calls/ApiFormatFunctions';
-
-// ---------------------------------------------------------------------------
-// Weather Outlook — today's conditions plus a multi-day forecast.
-//
-// This component SIMULATES forecast data locally so it works standalone.
-// To wire it to a real source, replace `generateForecast()` with a fetch to
-// a weather API, e.g. Open-Meteo (no key required):
-//
-//   const res = await fetch(
-//     `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}` +
-//     `&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_probability_max` +
-//     `&current_weather=true&timezone=auto`
-//   );
-//   const data = await res.json();
-//
-// then map `data.daily.*` arrays into the `days` shape used below.
-// ---------------------------------------------------------------------------
 
 export const CONDITIONS = [
   { key: 'clear', label: 'Klar', Icon: Sun, color: 'var(--warm)' },
@@ -36,7 +18,7 @@ export const CONDITIONS = [
 export const WEEKDAYS = ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'];
 
 const getMinMaxTemperatures = async() => {
-    const minMaxObjects = await getTemperatureForNext5Days();
+    const minMaxObjects = await meteoService.getTemperatureForNext5Days();
     const objects = minMaxObjects.temperatureForNext5Days;
 
     const out = [];
@@ -56,7 +38,7 @@ const getMinMaxTemperatures = async() => {
 
 
 const getPrecipitationDates = async() => {
-  const result = await getPrecipitationOfAllDates();
+  const result = await meteoService.getPrecipitationOfAllDates();
   const precipitations = result.allDates;
 
   const out = [];
@@ -70,6 +52,21 @@ const getPrecipitationDates = async() => {
 }
 
 const precipitations = await getPrecipitationDates();
+
+const getTodaysWindSpeed = async() => {
+  const result = await meteoService.getWindSpeedNext5Days();
+  const todaysWindSpeed = result.allDates.preciption0;
+  return todaysWindSpeed;
+}
+
+const todaysWindSpeed = await getTodaysWindSpeed();
+
+const getTodaysHumidity = async() => {
+  const result = await meteoService.getHumidityNext5Days();
+  return result.humidity0;
+}
+
+const todaysHumidity = await getTodaysHumidity();
 
 //Simulierte Pseudo API call function, soll durch eine richtige ersetzt werden
   export function generateForecast(days) {
@@ -97,8 +94,8 @@ const precipitations = await getPrecipitationDates();
       high: Math.round(baseHigh),
       low: Math.round(baseLow),
       precip,
-      wind: Math.round(6 + Math.random() * 18),
-      humidity: Math.round(40 + Math.random() * 35),
+      wind: Math.round(todaysWindSpeed),
+      humidity: Math.round(todaysHumidity),
       condition: cond,
     });
   }
