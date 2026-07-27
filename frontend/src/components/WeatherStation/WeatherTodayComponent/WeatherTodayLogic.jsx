@@ -1,5 +1,5 @@
 import {useState, useCallback, useEffect} from 'react';
-import { generateForecast } from '../../../sites/weather-outlook';
+import { generateForecast } from '../../../sites/WeatherDashboard/weather-outlook';
 import { meteoService } from '../../../services/SensorAPICalls';
 
 export function useWeatherTodayInformation() {
@@ -12,11 +12,14 @@ export function useWeatherTodayInformation() {
       setCurrentTemperature(temperature.currentTemperature);
     }, []);
 
+    useEffect(() => {
+        checkCurrentTemperature();
+    }, [])
 
     useEffect(() => {
     const tick = setInterval(() => {
       checkCurrentTemperature();
-    }, 1800);
+    }, 18000);
     return () => clearInterval(tick);
   }, [currentTemperature, checkCurrentTemperature]);
 

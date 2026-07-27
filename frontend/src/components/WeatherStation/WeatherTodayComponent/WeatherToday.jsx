@@ -2,7 +2,7 @@ import {
   Sun, CloudSun, Cloud, CloudRain, CloudSnow, CloudLightning, CloudFog,
   Wind, Droplets
 } from 'lucide-react';
-import { formatDate } from '../../../sites/weather-outlook';
+import { formatDate } from '../../../sites/WeatherDashboard/weather-outlook';
 import { useWeatherTodayInformation } from './WeatherTodayLogic';
 
 export default function WeatherToday() {

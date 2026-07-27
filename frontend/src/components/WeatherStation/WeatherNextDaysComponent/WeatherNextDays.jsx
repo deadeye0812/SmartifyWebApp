@@ -3,10 +3,10 @@ import {
   Sun, CloudSun, Cloud, CloudRain, CloudSnow, CloudLightning, CloudFog,
   Wind, Droplets
 } from 'lucide-react';
-import { generateForecast } from '../../../sites/weather-outlook';
-import { CONDITIONS } from '../../../sites/weather-outlook';
-import { WEEKDAYS } from '../../../sites/weather-outlook';
-import { formatDate } from '../../../sites/weather-outlook';
+import { generateForecast } from '../../../sites/WeatherDashboard/weather-outlook';
+import { CONDITIONS } from '../../../sites/WeatherDashboard/weather-outlook';
+import { WEEKDAYS } from '../../../sites/WeatherDashboard/weather-outlook';
+import { formatDate } from '../../../sites/WeatherDashboard/weather-outlook';
 import { useWeatherNextDaysInformation } from './WeatherNextDaysLogic';
 
 

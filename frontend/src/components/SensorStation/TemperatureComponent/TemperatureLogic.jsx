@@ -37,7 +37,7 @@ export function useTemperatureInformation() {
     const tick = setInterval(() => {
       setNow(new Date());
       applyReading();
-    }, 3600);
+    }, 1800);
     return () => clearInterval(tick);
   }, [temp, applyReading]);
 

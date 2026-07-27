@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import { generateForecast } from '../../../sites/weather-outlook';
+import { generateForecast } from '../../../sites/WeatherDashboard/weather-outlook';
 
 export function useWeatherHeaderInformation() {
     const [days, setDays] = useState(() => generateForecast(6));

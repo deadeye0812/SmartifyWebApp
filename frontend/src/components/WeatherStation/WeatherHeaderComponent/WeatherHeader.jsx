@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { RefreshCw } from 'lucide-react';
-import { generateForecast } from '../../../sites/weather-outlook';
+import { generateForecast } from '../../../sites/WeatherDashboard/weather-outlook';
 import { useWeatherHeaderInformation } from './WeatherHeaderLogic';
 
 export default function WeatherHeader() {

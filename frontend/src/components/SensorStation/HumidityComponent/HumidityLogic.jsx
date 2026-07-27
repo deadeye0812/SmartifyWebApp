@@ -37,7 +37,7 @@ export function useHumidityInformation() {
       setNow(new Date());
       const nextHum = Math.min(65, Math.max(30, hum + (Math.random() - 0.5) * 1.2));
       applyReading({ humidity: nextHum });
-    }, 3600);
+    }, 1800);
     return () => clearInterval(tick);
   }, [hum, applyReading]);
 

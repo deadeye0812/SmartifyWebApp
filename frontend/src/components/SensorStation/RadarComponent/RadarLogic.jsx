@@ -42,7 +42,7 @@ export function useRadarInformation() {
       setNow(new Date());
       const motionEvent = Math.random() < 0.06;
       applyReading({ motion: motionEvent });
-    }, 1800);
+    }, 1000);
     return () => clearInterval(tick);
   }, [applyReading]);
 
